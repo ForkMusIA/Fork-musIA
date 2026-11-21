@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fork_MusIA — Tu historia merece una canción</title>
+<style>
+:root{--bg:#101018;--panel:#191821;--gold:#d6b36a;--cream:#f5f2ea;--muted:#b9b4c0;--line:#383342}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -20%,#342943 0,#101018 48%);color:var(--cream);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+header{max-width:1050px;margin:auto;padding:22px 20px;display:flex;justify-content:space-between;align-items:center}
+.brand{font-size:1.35rem;font-weight:800;letter-spacing:.3px;color:#f1d8a0}.brand span{color:var(--gold)}
+.pill{border:1px solid #675638;color:#e9ce98;border-radius:99px;padding:5px 11px;font-size:.75rem}
+main{max-width:900px;margin:24px auto 70px;padding:0 18px}.hero{text-align:center;padding:24px 12px 28px}
+.kicker{color:var(--gold);text-transform:uppercase;letter-spacing:3px;font-size:.75rem;font-weight:700}
+h1{font-size:clamp(2rem,6vw,3.7rem);line-height:1.08;margin:12px 0;color:#fff}
+.hero p{color:var(--muted);max-width:620px;margin:12px auto}
+.panel{background:linear-gradient(145deg,#211e2b,#17161e);border:1px solid #514638;border-radius:22px;padding:clamp(18px,4vw,32px);box-shadow:0 24px 80px #0006}
+h2{font-size:1.35rem;margin:0 0 6px} .sub{color:var(--muted);font-size:.9rem;margin:0 0 22px}
+.section{margin:23px 0}.label{display:block;font-weight:700;margin-bottom:10px}
+.choices{display:flex;flex-wrap:wrap;gap:9px}
+.choice{border:1px solid #514b5b;background:#211f29;color:#e9e4ed;border-radius:999px;padding:10px 15px;cursor:pointer;font:inherit;font-size:.9rem;transition:.15s}
+.choice:hover{border-color:var(--gold)}.choice.active{background:#d6b36a;color:#17141b;border-color:#d6b36a;font-weight:750}
+input,textarea,select{width:100%;background:#121118;color:var(--cream);border:1px solid var(--line);border-radius:12px;padding:13px 14px;font:inherit;outline:none}
+input:focus,textarea:focus,select:focus{border-color:var(--gold)}textarea{min-height:120px;resize:vertical}
+.hidden{display:none}.hint{color:#a9a3af;font-size:.8rem;margin-top:7px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.submit{width:100%;border:0;border-radius:13px;padding:16px;background:linear-gradient(90deg,#d6b36a,#f0d69f);color:#17141b;font-weight:850;font-size:1rem;cursor:pointer;margin-top:8px}
+.note{font-size:.78rem;color:#a9a3af;text-align:center;margin-top:14px}
+footer{text-align:center;color:#888391;font-size:.8rem;padding:25px}
+#result{display:none;margin-top:18px;padding:15px;border:1px solid #6b5a3d;background:#24202a;border-radius:12px}
+@media(max-width:620px){.grid{grid-template-columns:1fr}header{padding:16px}.hero{padding-top:15px}}
+</style>
+</head>
+<body>
+<header><div class="brand">♫ Fork_<span>MusIA</span></div><div class="pill">MÚSICA PERSONALIZADA CON IA</div></header>
+<main>
+<section class="hero"><div class="kicker">Tu historia, convertida en música</div><h1>Tu historia merece<br>una canción.</h1><p>Cuéntanos a quién quieres dedicarla, qué quieres celebrar y los recuerdos que no quieres olvidar.</p></section>
+<section class="panel">
+<h2>Crea una canción única</h2><p class="sub">Completa los detalles. Tu historia será la inspiración.</p>
+<form id="songForm">
+<div class="section"><span class="label">¿Para quién es esta canción?</span><div class="choices" data-group="recipient">
+<button type="button" class="choice" data-value="Novio(a)">Novio(a)</button><button type="button" class="choice" data-value="Esposo(a)">Esposo(a)</button><button type="button" class="choice" data-value="Amigo(a)">Amigo(a)</button><button type="button" class="choice" data-value="Compañero(a)">Compañero(a)</button><button type="button" class="choice" data-value="Otro">Otro</button>
+</div><div id="otherWrap" class="hidden" style="margin-top:12px"><input id="otherRecipient" placeholder="Escribe para quién es la canción"></div></div>
+<div class="section"><span class="label">¿Qué ocasión quieres celebrar?</span><div class="choices" data-group="occasion">
+<button type="button" class="choice" data-value="Cumpleaños">Cumpleaños</button><button type="button" class="choice" data-value="Amor">Amor</button><button type="button" class="choice" data-value="Aniversario">Aniversario</button><button type="button" class="choice" data-value="Boda">Boda</button><button type="button" class="choice" data-value="Familia">Familia</button><button type="button" class="choice" data-value="Amistad">Amistad</button><button type="button" class="choice" data-value="Otro">Otro</button>
+</div></div>
+<div class="section"><span class="label">¿Qué estilo musical prefieres?</span><div class="choices" data-group="genre">
+<button type="button" class="choice" data-value="Romántica">Romántica</button><button type="button" class="choice" data-value="Pop latino">Pop latino</button><button type="button" class="choice" data-value="Cumbia">Cumbia</button><button type="button" class="choice" data-value="Reguetón">Reguetón</button><button type="button" class="choice" data-value="Rock">Rock</button><button type="button" class="choice" data-value="Folklore">Folklore</button><button type="button" class="choice" data-value="Balada">Balada</button>
+</div></div>
+<div class="grid">
+<div class="section"><label class="label" for="name">Nombre de la persona (opcional)</label><input id="name" placeholder="Ej. María"></div>
+<div class="section"><label class="label" for="voice">Tipo de voz</label><select id="voice"><option>Voz masculina</option><option>Voz femenina</option><option>Dueto</option><option>Instrumental, sin voz</option></select></div>
+</div>
+<div class="section"><label class="label" for="story">Cuéntanos tu historia</label><textarea id="story" required minlength="15" placeholder="Escribe cómo se conocieron, qué recuerdos comparten, qué quieres agradecer o qué mensaje quieres transmitir..."></textarea><div class="hint">Mientras más detalles compartas, más personal podrá ser la letra.</div></div>
+<button class="submit" type="submit">CONTINUAR CON MI CANCIÓN ✨</button>
+<p class="note">Prototipo inicial: este formulario todavía no genera música ni procesa pagos.</p>
+<div id="result" role="status"></div>
+</form></section></main>
+<footer>© Fork_MusIA · Tu historia merece una canción.</footer>
+<script>
+const selected={};
+document.querySelectorAll('.choices').forEach(group=>{
+ group.querySelectorAll('.choice').forEach(btn=>btn.addEventListener('click',()=>{
+  const key=group.dataset.group; group.querySelectorAll('.choice').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active'); selected[key]=btn.dataset.value;
+  if(key==='recipient') document.getElementById('otherWrap').classList.toggle('hidden',btn.dataset.value!=='Otro');
+ }));
+});
+document.getElementById('songForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ const recipient=selected.recipient==='Otro'?document.getElementById('otherRecipient').value.trim():selected.recipient;
+ if(!recipient){alert('Selecciona para quién es la canción.');return}
+ if(selected.recipient==='Otro'&&!recipient){alert('Escribe para quién es la canción.');return}
+ if(!selected.occasion||!selected.genre){alert('Selecciona una ocasión y un estilo musical.');return}
+ const data={destinatario:recipient,ocasion:selected.occasion,estilo:selected.genre,nombre:document.getElementById('name').value,voz:document.getElementById('voice').value,historia:document.getElementById('story').value};
+ const box=document.getElementById('result');box.style.display='block';
+ box.innerHTML='<strong>¡Tu solicitud de prueba está lista!</strong><p style="margin-bottom:0;color:#d4cfda">Elegiste '+data.destinatario+' · '+data.ocasion+' · '+data.estilo+'. El siguiente paso será conectar este formulario al generador musical y a los pagos.</p>';
+});
+</script>
+</body></html>
