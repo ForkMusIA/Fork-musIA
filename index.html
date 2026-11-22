@@ -158,32 +158,6 @@ function crearCancion(){
   return;
  }
 
- const inicio=[
- "Hay momentos que no se pueden olvidar,",
- "A veces la vida nos sorprende sin avisar,",
- "No sabía que el destino nos iba a encontrar,",
- "Hoy quiero que estas palabras puedan expresar"
- ];
-
- const final=[
- "Y si el tiempo vuelve a comenzar,",
- "Que nunca nos falten motivos para soñar,",
- "Porque lo verdadero no se puede borrar,",
- "Y esta canción siempre te lo va a recordar."
- ];
-
- const verso1=historia ?
- "Recuerdo aquel momento: "+historia :
- "Desde que llegaste algo empezó a cambiar en mí.";
-
- const verso2=cualidad ?
- "Hay algo en ti que me hace especial: "+cualidad :
- "Tu presencia le da otro sentido a mis días.";
-
- const coro=mensaje ?
- mensaje :
- "Quiero que sepas lo importante que eres, que hay sentimientos que no se pueden explicar.";
-
  const titulo=nombre+" - Una historia hecha canción";
 
  const texto=
@@ -192,31 +166,85 @@ function crearCancion(){
  "Voz: "+voz+"\n"+
  "Estilo: "+estilo+"\n"+
  "Ocasión: "+ocasion+"\n\n"+
+
  "🎤 INTRODUCCIÓN\n"+
- inicio[Math.floor(Math.random()*inicio.length)]+" que eres alguien especial.\n\n"+
+ "Hay historias que comienzan sin avisar,\n"+
+ "y momentos que jamás se pueden olvidar,\n"+
+ "hoy quiero dedicarte esta canción,\n"+
+ "porque tienes un lugar en mi corazón.\n\n"+
+
  "🎶 VERSO 1\n"+
- verso1+"\n"+
- "Y aunque pasen los años, este recuerdo vivirá.\n\n"+
- "🎶 VERSO 2\n"+
- verso2+"\n"+
- "Hay sentimientos que las palabras no pueden explicar.\n\n"+
+ (historia || "Desde que llegaste todo empezó a cambiar.")+"\n"+
+ "Fue una casualidad que se volvió especial,\n"+
+ "un recuerdo que el tiempo no podrá borrar,\n"+
+ "y aunque los días sigan pasando,\n"+
+ "mi corazón te seguirá recordando.\n"+
+ "Desde aquel día algo cambió en mi interior,\n"+
+ "sin buscarlo encontré una razón para el amor.\n\n"+
+
+ "🎶 PRE-CORO\n"+
+ "Y si pudiera volver a comenzar,\n"+
+ "te volvería a buscar en cualquier lugar,\n"+
+ "porque lo que siento es de verdad,\n"+
+ "y no lo cambiaría por nada más.\n\n"+
+
  "❤️ CORO\n"+
- nombre+", esta canción es para ti,\n"+
- coro+"\n"+
- "Porque hay personas que hacen más bonito vivir,\n"+
- "y tú eres una de ellas, nunca lo voy a olvidar.\n\n"+
- "🎶 PUENTE\n"+
- "No importa lo que venga, ni lo que pueda pasar,\n"+
- "hay historias que merecen ser cantadas una vez más.\n\n"+
- "🌟 FINAL\n"+
- final[Math.floor(Math.random()*final.length)]+"\n"+
- "Esta canción es nuestra historia, y la quiero celebrar.";
+ nombre+", quiero que puedas comprender,\n"+
+ (mensaje || "que eres alguien que siempre voy a querer.")+"\n"+
+ "Eres esa luz que ilumina mis días,\n"+
+ "la razón de tantas alegrías,\n"+
+ "si el mundo entero se llegara a terminar,\n"+
+ "a tu lado volvería a empezar.\n"+
+ "Porque esta historia no tiene final,\n"+
+ "lo que siento por ti es especial.\n\n"+
+
+ "🎶 VERSO 2\n"+
+ (cualidad || "Me encanta cada detalle de tu forma de ser.")+"\n"+
+ "Tu manera de hablar, tu forma de mirar,\n"+
+ "son pequeños milagros difíciles de explicar,\n"+
+ "cada momento que vivimos juntos,\n"+
+ "vale más que todos los tesoros del mundo.\n"+
+ "No necesito promesas del destino,\n"+
+ "si puedo recorrer contigo el camino.\n"+
+ "Y cuando la noche nos vuelva a encontrar,\n"+
+ "tendré mil razones para volverte a amar.\n\n"+
+
+ "❤️ CORO\n"+
+ nombre+", quiero que puedas comprender,\n"+
+ (mensaje || "que eres alguien que siempre voy a querer.")+"\n"+
+ "Eres esa luz que ilumina mis días,\n"+
+ "la razón de tantas alegrías,\n"+
+ "si el mundo entero se llegara a terminar,\n"+
+ "a tu lado volvería a empezar.\n\n"+
+
+ "🎼 PUENTE MUSICAL\n"+
+ "Que hablen los años, que pase el tiempo,\n"+
+ "que nunca se apague este sentimiento,\n"+
+ "si alguna tormenta nos quiere separar,\n"+
+ "juntos tendremos fuerzas para continuar.\n"+
+ "Y aunque la vida nos ponga a prueba,\n"+
+ "mi corazón por ti siempre se renueva.\n\n"+
+
+ "🌟 CORO FINAL\n"+
+ "Hoy quiero gritarlo una vez más,\n"+
+ "que lo nuestro no se puede comparar,\n"+
+ "eres mi presente y mi ilusión,\n"+
+ "la historia más bonita de mi corazón.\n"+
+ "Y si la vida me deja elegir,\n"+
+ "mil veces te volvería a elegir,\n"+
+ "porque no existe otro lugar,\n"+
+ "donde yo quiera estar.\n\n"+
+
+ "🎤 DESPEDIDA\n"+
+ "Esta canción es para ti,\n"+
+ "por todo lo que hemos vivido,\n"+
+ "y por todo lo que nos falta por vivir,\n"+
+ "porque nuestra historia sigue escribiéndose.";
 
  document.getElementById("letra").textContent=texto;
  document.getElementById("resultado").style.display="block";
  document.getElementById("resultado").scrollIntoView({behavior:"smooth"});
 }
-
 function copiarLetra(){
  const texto=document.getElementById("letra").textContent;
  navigator.clipboard.writeText(texto)
