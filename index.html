@@ -158,59 +158,78 @@ function crearCancion(){
   return;
  }
 
- const elegir=(lista)=>lista[Math.floor(Math.random()*lista.length)];
+ const limpiar=(texto)=>texto.replace(/[.!?]+$/,"");
+
+ const elegir=(lista)=>{
+  return lista[Math.floor(Math.random()*lista.length)];
+ };
+
+ const elegirVarias=(lista,cantidad)=>{
+  const copia=[...lista];
+  const resultado=[];
+  for(let i=0;i<cantidad && copia.length>0;i++){
+   const indice=Math.floor(Math.random()*copia.length);
+   resultado.push(copia.splice(indice,1)[0]);
+  }
+  return resultado;
+ };
 
  const comienzos=[
- "Nunca imaginé que el destino nos fuera a encontrar,",
- "Hay encuentros que la vida no puede explicar,",
- "Todo comenzó con una mirada y una ilusión,",
- "A veces llega alguien y transforma el corazón,",
- "Entre tantas personas, la vida te puso en mi camino,"
- ];
-
- const conexiones=[
- "Y desde aquel instante algo nuevo nació,",
- "Sin darme cuenta mi mundo cambió,",
- "Fue como encontrar lo que tanto esperé,",
- "Y en cada momento más razones encontré,",
- "Desde entonces mis días tienen otro color,"
+ "Hay historias que comienzan sin avisar,",
+ "Nunca imaginé que te iba a encontrar,",
+ "Entre millones de caminos llegaste a mi vida,",
+ "A veces el destino tiene sus propias razones,",
+ "Todo comenzó sin saber lo que vendría,"
  ];
 
  const versos=[
- "Hay recuerdos que se quedan viviendo en la memoria,",
- "Cada pequeño instante se convierte en una historia,",
- "No hacen falta grandes cosas para ser feliz,",
- "Porque los mejores momentos los comparto junto a ti,",
- "El tiempo sigue avanzando y no deja de sorprender,",
- "Y cada nuevo amanecer me recuerda cuánto puedo querer,"
+ "Y poco a poco te volviste parte de mis días,",
+ "Hay recuerdos que todavía me hacen sonreír,",
+ "Cada momento contigo tiene algo especial,",
+ "No necesito tenerlo todo si te puedo encontrar,",
+ "Hay instantes pequeños que se vuelven eternos,",
+ "Contigo aprendí que querer también es cuidar,",
+ "Y hasta los días grises pueden volver a brillar,",
+ "Porque algunas personas llegan para cambiarlo todo,",
+ "No existe un mapa para encontrar la felicidad,",
+ "A veces una sonrisa puede cambiar una realidad,"
  ];
 
  const coros=[
- "Eres esa melodía que no deja de sonar,",
- "La razón de tantas ganas de volver a comenzar,",
- "Si pudiera elegir mil veces dónde estar,",
- "Mil veces a tu lado volvería a caminar,",
- "Que lo escuche todo el mundo, que se entere el corazón,",
- "Que lo nuestro no es casualidad, es una hermosa conexión,"
+ "Y quiero que sepas que te volvería a elegir,",
+ "Eres esa canción que quiero repetir,",
+ "Si el mundo se detiene, contigo quiero estar,",
+ "No necesito razones para volverte a amar,",
+ "Que lo sepa el mundo, que lo escuche el corazón,",
+ "Lo que siento por ti no cabe en una canción,",
+ "Y si pudiera pedir un deseo al despertar,",
+ "Sería tener mil momentos más para compartir,"
  ];
 
  const puentes=[
- "Y si algún día el camino se vuelve complicado,",
- "Si aparecen mil tormentas y cambia el calendario,",
- "No prometo que la vida siempre sea perfecta,",
- "Pero sí que esta historia merece ser eterna,",
- "Porque lo verdadero no se compra ni se olvida,",
- "Y hay personas que se vuelven parte de nuestra vida,"
+ "Y si la vida nos pone a prueba alguna vez,",
+ "No todo será perfecto, eso lo sé,",
+ "Pero mientras queden sueños por cumplir,",
+ "Siempre habrá una razón para seguir,",
+ "Que pasen los años, que cambie la estación,",
+ "Hay sentimientos que no entienden de tiempo,",
+ "Y lo que nace de verdad deja huellas,"
  ];
 
- const final=[
- "Que nunca se termine esta forma de sentir,",
- "Porque todavía nos queda mucho por vivir,",
- "Y aunque cambien los años y cambie la estación,",
- "Siempre habrá un lugar para ti en mi corazón,",
- "Esta historia no termina con esta canción,",
- "Apenas está comenzando nuestra mejor versión,"
+ const finales=[
+ "Esta historia todavía tiene mucho que contar,",
+ "Y quedan tantos sueños por alcanzar,",
+ "Que nunca se apague esta emoción,",
+ "Porque siempre tendrás un lugar en mi corazón,",
+ "Lo mejor de esta historia está por comenzar,",
+ "Y esta canción te lo quiere recordar,"
  ];
+
+ const inicio=elegir(comienzos);
+ const versosElegidos=elegirVarias(versos,4);
+ const corosElegidos=elegirVarias(coros,4);
+ const puenteElegido=elegirVarias(puentes,3);
+ const finalElegido=elegirVarias(finales,2);
 
  const titulo=nombre+" - Una historia hecha canción";
 
@@ -222,76 +241,66 @@ function crearCancion(){
  "Ocasión: "+ocasion+"\n\n"+
 
  "🎤 INTRODUCCIÓN\n"+
+ inicio+"\n"+
  elegir(comienzos)+"\n"+
- elegir(conexiones)+"\n"+
- "Hoy quiero dedicarte estas palabras,\n"+
- "para que sepas lo que mi corazón guarda.\n\n"+
+ "Hay algo que hoy quiero decirte,\n"+
+ "y por eso convertí mis sentimientos en música.\n\n"+
 
  "🎶 VERSO 1\n"+
- (historia || "Desde que llegaste todo empezó a cambiar.")+"\n"+
- elegir(versos)+"\n"+
- elegir(versos)+"\n"+
- elegir(conexiones)+"\n"+
- "Hay momentos que quisiera volver a vivir,\n"+
- "porque tienen sentido cuando estás junto a mí.\n"+
- elegir(versos)+"\n\n"+
+ (historia ? limpiar(historia)+"," : "Desde que llegaste algo cambió,")+"\n"+
+ versosElegidos[0]+"\n"+
+ versosElegidos[1]+"\n"+
+ elegir(comienzos)+"\n\n"+
 
  "🎶 PRE-CORO\n"+
- "Y aunque no encuentre las palabras para explicar,\n"+
- "hay sentimientos que no se pueden ocultar.\n"+
- elegir(coros)+"\n"+
- elegir(conexiones)+"\n\n"+
+ "Y aunque a veces me cueste explicar,\n"+
+ "todo lo que llevo dentro y no puedo ocultar,\n"+
+ versosElegidos[2]+"\n"+
+ corosElegidos[0]+"\n\n"+
 
  "❤️ CORO\n"+
- nombre+", escucha lo que quiero decir,\n"+
- (mensaje || "que eres alguien muy especial para mí.")+"\n"+
- elegir(coros)+"\n"+
- elegir(coros)+"\n"+
- "No hay distancia que pueda borrar,\n"+
- "lo que el corazón aprendió a guardar.\n"+
- elegir(coros)+"\n"+
- "Esta canción siempre hablará de ti.\n\n"+
+ nombre+", esta canción es para ti,\n"+
+ (mensaje ? limpiar(mensaje)+"," : "porque eres especial para mí,")+"\n"+
+ corosElegidos[1]+"\n"+
+ corosElegidos[2]+"\n"+
+ "Y si tuviera que volver a comenzar,\n"+
+ "mil veces te volvería a encontrar.\n\n"+
 
  "🎶 VERSO 2\n"+
- (cualidad || "Tu manera de ser es algo especial.")+"\n"+
- elegir(versos)+"\n"+
- "Son esos pequeños detalles los que hacen la diferencia,\n"+
- "los que convierten un momento en una experiencia.\n"+
- elegir(conexiones)+"\n"+
- "Y si mañana todo vuelve a comenzar,\n"+
- "tendría nuevas razones para volverte a elegir.\n"+
- elegir(versos)+"\n\n"+
+ (cualidad ? limpiar(cualidad)+"," : "Tu manera de ser me hace sonreír,")+"\n"+
+ versosElegidos[3]+"\n"+
+ "Son esos detalles que no se pueden comprar,\n"+
+ "los que hacen que esta historia sea especial.\n"+
+ "Y todavía quedan sueños por vivir,\n"+
+ "y muchos caminos por descubrir.\n\n"+
 
  "❤️ CORO\n"+
- nombre+", escucha lo que quiero decir,\n"+
- (mensaje || "que eres alguien muy especial para mí.")+"\n"+
- elegir(coros)+"\n"+
- elegir(coros)+"\n"+
- "No hay distancia que pueda borrar,\n"+
- "lo que el corazón aprendió a guardar.\n\n"+
+ nombre+", esta canción es para ti,\n"+
+ (mensaje ? limpiar(mensaje)+"," : "porque eres especial para mí,")+"\n"+
+ corosElegidos[0]+"\n"+
+ corosElegidos[2]+"\n"+
+ corosElegidos[3]+"\n\n"+
 
- "🎼 PUENTE MUSICAL\n"+
- elegir(puentes)+"\n"+
- elegir(puentes)+"\n"+
- "Que la vida nos encuentre siempre con ilusión,\n"+
- "y que nunca pierda su fuerza esta canción.\n"+
- elegir(puentes)+"\n"+
- elegir(final)+"\n\n"+
+ "🎼 PUENTE\n"+
+ puenteElegido[0]+"\n"+
+ puenteElegido[1]+"\n"+
+ "No prometo que todo sea fácil,\n"+
+ "pero sí que esta historia vale la pena.\n"+
+ puenteElegido[2]+"\n\n"+
 
  "🌟 CORO FINAL\n"+
- "Que se escuche fuerte nuestra historia,\n"+
- "que cada recuerdo se convierta en memoria,\n"+
- nombre+", hoy te quiero recordar,\n"+
- "que hay sentimientos imposibles de reemplazar.\n"+
- elegir(coros)+"\n"+
- elegir(coros)+"\n"+
- elegir(final)+"\n"+
- elegir(final)+"\n\n"+
+ "Que se escuche fuerte esta canción,\n"+
+ "que hable por mí y por mi corazón.\n"+
+ nombre+", nunca dejes de recordar,\n"+
+ "que hay momentos que no se pueden reemplazar.\n"+
+ corosElegidos[1]+"\n"+
+ finalElegido[0]+"\n"+
+ finalElegido[1]+"\n\n"+
 
  "🎤 DESPEDIDA\n"+
- "Esta canción nació de una historia real,\n"+
- "de momentos que la hacen especial.\n"+
- "Y mientras exista algo por sentir,\n"+
+ "Hoy esta historia se convirtió en canción,\n"+
+ "nació de un recuerdo y de una emoción.\n"+
+ "Y mientras existan motivos para sentir,\n"+
  "siempre habrá una canción por escribir.";
 
  document.getElementById("letra").textContent=texto;
