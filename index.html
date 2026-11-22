@@ -53,6 +53,9 @@ button:hover{opacity:.9}
 
 <div class="card">
 <h2>❤️ ¿Para quién es tu canción?</h2>
+ <label>Tu correo electrónico (obligatorio)</label>
+<input type="email" id="email" placeholder="tucorreo@gmail.com" required>
+<p class="nota">Te enviaremos un enlace privado para volver a escuchar tu canción.</p>
 
 <label>¿A quién quieres dedicarla?</label>
 <select id="persona">
@@ -144,6 +147,7 @@ button:hover{opacity:.9}
 <script>
 async function crearCancion(){
 
+ const email=document.getElementById("email").value.trim();
  const persona=document.getElementById("persona").value;
  const nombre=document.getElementById("nombre").value.trim() || persona;
  const ocasion=document.getElementById("ocasion").value;
@@ -155,6 +159,10 @@ async function crearCancion(){
  const estilo=document.getElementById("estilo").value;
 
  const idioma=document.getElementById("idioma")?.value || "Español";
+  if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+  alert("Introduce un correo electrónico válido.");
+  return;
+ }
 
  if(!historia && !cualidad && !mensaje){
   alert("Cuéntanos al menos un detalle para crear tu canción.");
@@ -186,6 +194,7 @@ async function crearCancion(){
      "Content-Type":"application/json"
     },
     body:JSON.stringify({
+     email,
      persona,
      nombre,
      ocasion,
