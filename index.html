@@ -3,82 +3,187 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fork-MUSICA | Crea tu música con IA</title>
+<title>FORK-MUSICA | Tu vida tiene una canción</title>
 
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
+
 body{
-margin:0;
 font-family:Arial,sans-serif;
-background:#10101c;
+background:#0c0b14;
 color:white;
 }
+
 header{
-padding:25px;
-text-align:center;
-background:#19192c;
-border-bottom:1px solid #333;
+padding:25px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#151321;
+border-bottom:1px solid #302840;
 }
+
 .logo{
-font-size:32px;
+font-size:27px;
 font-weight:bold;
-color:#b78aff;
+color:#c18aff;
 }
-header p{color:#bbb}
-main{
-max-width:750px;
-margin:40px auto;
-padding:25px;
+
+.logo span{color:white}
+
+.badge{
+color:#d4b5ff;
+font-size:13px;
 }
-h1{text-align:center;font-size:34px}
-.descripcion{text-align:center;color:#bbb}
-.panel{
-background:#1d1d30;
-padding:25px;
-border-radius:18px;
-margin-top:30px;
+
+.hero{
+text-align:center;
+padding:65px 20px 35px;
 }
+
+.hero h1{
+font-size:42px;
+margin-bottom:18px;
+}
+
+.hero h1 span{color:#bd83ff}
+
+.hero p{
+color:#aaa3b9;
+font-size:17px;
+line-height:1.6;
+}
+
+.container{
+max-width:850px;
+margin:25px auto 70px;
+padding:20px;
+}
+
+.card{
+background:#191624;
+border:1px solid #342b46;
+border-radius:20px;
+padding:30px;
+margin-bottom:22px;
+}
+
+h2{
+font-size:21px;
+margin-bottom:22px;
+color:#d4b1ff;
+}
+
 label{
 display:block;
-margin:18px 0 8px;
-color:#d5c2ff;
+margin:17px 0 9px;
+font-size:14px;
+color:#ddd4e9;
 }
+
 input,textarea,select{
 width:100%;
 padding:14px;
-border-radius:9px;
-border:1px solid #444;
-background:#11111e;
+background:#100e19;
+border:1px solid #403650;
+border-radius:10px;
+color:white;
+font-size:15px;
+outline:none;
+}
+
+input:focus,textarea:focus,select:focus{
+border-color:#b477ff;
+}
+
+textarea{
+min-height:105px;
+resize:vertical;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+button{
+border:none;
+cursor:pointer;
+font-weight:bold;
+border-radius:11px;
+transition:.2s;
+}
+
+button:hover{transform:translateY(-2px)}
+
+.option{
+padding:14px;
+background:#292239;
+color:white;
+border:1px solid #49385e;
+}
+
+.option.active{
+background:#8044bb;
+border-color:#c18aff;
+}
+
+.options{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+}
+
+.surprise{
+width:100%;
+padding:17px;
+margin-top:20px;
+background:linear-gradient(90deg,#873bce,#c04fd2);
 color:white;
 font-size:16px;
 }
-textarea{height:110px;resize:vertical}
-button{
+
+.create{
 width:100%;
-padding:16px;
-margin-top:22px;
-border:0;
-border-radius:10px;
-background:linear-gradient(90deg,#8b45ff,#d04cff);
+padding:19px;
+background:linear-gradient(90deg,#a34bdf,#6544d9);
 color:white;
-font-size:17px;
-font-weight:bold;
-cursor:pointer;
+font-size:19px;
+margin-top:20px;
 }
-button:hover{opacity:.85}
+
 #resultado{
 display:none;
 margin-top:25px;
-padding:20px;
-background:#11111e;
-border-radius:12px;
-white-space:pre-wrap;
-line-height:1.7;
+padding:25px;
+background:#100e19;
+border:1px solid #8154aa;
+border-radius:15px;
+line-height:1.8;
 }
+
+#resultado h2{color:#d5a4ff}
+
+.note{
+color:#aaa3b9;
+font-size:13px;
+margin-top:12px;
+}
+
 footer{
 text-align:center;
 padding:30px;
-color:#888;
+color:#827b90;
+border-top:1px solid #302840;
+}
+
+@media(max-width:600px){
+.hero h1{font-size:31px}
+.grid{grid-template-columns:1fr}
+.options{grid-template-columns:1fr 1fr}
+.card{padding:20px}
+header{padding:20px}
 }
 </style>
 </head>
@@ -86,79 +191,239 @@ color:#888;
 <body>
 
 <header>
-<div class="logo">🎵 FORK-MUSICA</div>
-<p>Tu imaginación. Tu música. Tu mundo.</p>
+<div class="logo">🎵 FORK<span>-MUSICA</span></div>
+<div class="badge">CREA ALGO ÚNICO</div>
 </header>
 
-<main>
-<h1>Crea canciones con IA</h1>
-<p class="descripcion">
-Convierte tus ideas en canciones y descubre tu creatividad musical.
+<section class="hero">
+<h1>Tu vida tiene una <span>canción.</span></h1>
+<p>
+Cuéntanos tus ideas, tus recuerdos o lo que sientes.<br>
+Nosotros lo convertiremos en música.
 </p>
+</section>
 
-<div class="panel">
+<main class="container">
 
-<label>¿De qué quieres que trate tu canción?</label>
-<textarea id="idea" placeholder="Ejemplo: Una historia de amor que terminó, pero dejó recuerdos..."></textarea>
+<div class="card">
 
-<label>Género musical</label>
-<select id="genero">
-<option>Pop</option>
-<option>Reggaetón</option>
-<option>Trap</option>
-<option>Rock</option>
-<option>Balada</option>
-<option>Cumbia</option>
-<option>Electrónica</option>
-<option>Rap</option>
-<option>Folklore</option>
+<h2>❤️ 1. ¿Para quién es tu canción?</h2>
+
+<label>Quiero crear una canción para:</label>
+
+<select id="destino">
+<option>Mi novia</option>
+<option>Mi esposa</option>
+<option>Mi novio</option>
+<option>Mi esposo</option>
+<option>Mi mamá</option>
+<option>Mi papá</option>
+<option>Un amigo o amiga</option>
+<option>Mi familia</option>
+<option>Para mí</option>
+<option>Otra ocasión</option>
 </select>
 
-<label>Estado de ánimo</label>
-<select id="animo">
-<option>Romántico</option>
-<option>Triste</option>
-<option>Feliz</option>
-<option>Motivador</option>
-<option>Melancólico</option>
-<option>Enérgico</option>
+<label>Nombre de esa persona (opcional)</label>
+<input id="nombre" placeholder="Ejemplo: Daniela">
+
+<label>¿Cuál es la ocasión?</label>
+
+<select id="ocasion">
+<option>Una sorpresa romántica</option>
+<option>Aniversario</option>
+<option>Cumpleaños</option>
+<option>Declaración de amor</option>
+<option>Pedida de matrimonio</option>
+<option>Homenaje</option>
+<option>Amistad</option>
+<option>Superación personal</option>
+<option>Simplemente porque sí</option>
+<option>Otra ocasión</option>
 </select>
-
-<label>Nombre de tu canción</label>
-<input id="titulo" placeholder="Mi nueva canción">
-
-<button onclick="crearCancion()">✨ Crear mi canción</button>
-
-<div id="resultado"></div>
 
 </div>
+
+<div class="card">
+
+<h2>✨ 2. Cuéntanos algunos detalles</h2>
+
+<label>¿Dónde se conocieron?</label>
+<input id="lugar" placeholder="Ejemplo: En una fiesta, en el colegio...">
+
+<label>¿Tienen alguna fecha especial?</label>
+<input id="fecha" placeholder="Ejemplo: 14 de febrero de 2022">
+
+<label>¿Qué es lo que más te gusta de esa persona?</label>
+<textarea id="gustos" placeholder="Su sonrisa, sus ojos, su forma de ser, cómo me trata..."></textarea>
+
+<label>¿Qué mensaje quieres transmitir?</label>
+<textarea id="mensaje" placeholder="Quiero decirle que es lo mejor que me pasó en la vida..."></textarea>
+
+<label>¿Algún recuerdo que quieras incluir?</label>
+<textarea id="recuerdo" placeholder="Algún viaje, una anécdota, una promesa..."></textarea>
+
+<p class="note">No necesitas completar todas las preguntas. Cuantos más detalles compartas, más personalizada será tu canción.</p>
+
+</div>
+
+<div class="card">
+
+<h2>🎼 3. Elige cómo quieres que suene</h2>
+
+<div class="grid">
+
+<div>
+<label>Género musical</label>
+<select id="genero">
+<option>Bachata</option>
+<option>Reggaetón romántico</option>
+<option>Cumbia</option>
+<option>Pop</option>
+<option>Balada</option>
+<option>Salsa</option>
+<option>Rock</option>
+<option>Trap</option>
+<option>Rap</option>
+<option>Folklore</option>
+<option>Merengue</option>
+<option>Electrónica</option>
+</select>
+</div>
+
+<div>
+<label>Tipo de voz</label>
+<select id="voz">
+<option>Masculina</option>
+<option>Femenina</option>
+<option>Dueto masculino y femenino</option>
+</select>
+</div>
+
+<div>
+<label>Estilo musical</label>
+<select id="estilo">
+<option>Suave y romántico</option>
+<option>Emotivo</option>
+<option>Alegre y divertido</option>
+<option>Triste y nostálgico</option>
+<option>Apasionado</option>
+<option>Enérgico</option>
+</select>
+</div>
+
+<div>
+<label>Velocidad</label>
+<select id="ritmo">
+<option>Lento</option>
+<option>Moderado</option>
+<option>Rápido</option>
+</select>
+</div>
+
+</div>
+
+<button class="option" style="width:100%;margin-top:25px;padding:16px"
+onclick="sorprenderme()">
+✨ SORPRÉNDEME
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>🎧 4. ¡Vamos a crear tu canción!</h2>
+
+<p style="color:#aaa;line-height:1.7">
+La inteligencia artificial utilizará tus respuestas para preparar una canción original y personalizada.
+</p>
+
+<button class="create" onclick="crearCancion()">
+🎵 PREPARAR MI CANCIÓN
+</button>
+
+<div id="resultado">
+<h2>✨ Tu canción está tomando forma</h2>
+<div id="resumen"></div>
+<p class="note">
+Esta es una vista previa de tu solicitud. La generación de audio musical se habilitará al conectar nuestro motor de inteligencia artificial.
+</p>
+</div>
+
+</div>
+
 </main>
 
 <footer>
-Fork-MUSICA © 2026 | Creando nuevos sonidos
+FORK-MUSICA © 2026<br>
+Tu historia. Tus emociones. Tu canción.
 </footer>
 
 <script>
-function crearCancion(){
-const idea=document.getElementById("idea").value;
-const genero=document.getElementById("genero").value;
-const animo=document.getElementById("animo").value;
-const titulo=document.getElementById("titulo").value;
 
-if(!idea.trim()){
-alert("Primero escribe la idea de tu canción.");
-return;
+function sorprenderme(){
+
+const generos=[
+"Bachata","Pop","Cumbia","Balada","Reggaetón romántico","Salsa"
+];
+
+const estilos=[
+"Suave y romántico","Emotivo","Alegre y divertido",
+"Apasionado","Enérgico"
+];
+
+document.getElementById("genero").value=
+generos[Math.floor(Math.random()*generos.length)];
+
+document.getElementById("estilo").value=
+estilos[Math.floor(Math.random()*estilos.length)];
+
+document.getElementById("voz").value=
+Math.random()>.5?"Masculina":"Femenina";
+
+document.getElementById("ritmo").value="Moderado";
+
 }
+
+function crearCancion(){
+
+const campos=[
+["Destinatario","destino"],
+["Nombre","nombre"],
+["Ocasión","ocasion"],
+["Lugar donde se conocieron","lugar"],
+["Fecha especial","fecha"],
+["Detalles personales","gustos"],
+["Mensaje","mensaje"],
+["Recuerdos","recuerdo"],
+["Género","genero"],
+["Voz","voz"],
+["Estilo","estilo"],
+["Ritmo","ritmo"]
+];
+
+let html="";
+
+campos.forEach(([titulo,id])=>{
+let valor=document.getElementById(id).value.trim();
+
+if(valor){
+html+="<p><strong>"+titulo+":</strong> "+
+valor.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")+
+"</p>";
+}
+});
+
+document.getElementById("resumen").innerHTML=html;
 
 document.getElementById("resultado").style.display="block";
 
-document.getElementById("resultado").innerText=
-"🎵 "+(titulo || "Mi nueva canción")+
-"\n\nGénero: "+genero+
-"\nEstado de ánimo: "+animo+
-"\n\nTu idea musical:\n"+idea+
-"\n\n✨ Tu proyecto musical está listo para desarrollar.\n\nPróximamente: generación de letras, voces e instrumentales con inteligencia artificial.";
+document.getElementById("resultado").scrollIntoView({
+behavior:"smooth"
+});
+
 }
+
 </script>
 
 </body>
