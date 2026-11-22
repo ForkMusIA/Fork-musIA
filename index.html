@@ -133,7 +133,7 @@ button:hover{opacity:.9}
 <button onclick="crearCancion()">✨ CREAR MI LETRA GRATIS</button>
 </div>
 
-<div class="card" id="resultado">
+<div class="card" id="resultado" style="display:none;">
 <h2>🎤 Tu canción está lista</h2>
 <div id="letra"></div>
 <button onclick="copiarLetra()">📋 COPIAR MI CANCIÓN</button>
@@ -262,7 +262,8 @@ function copiarLetra(){
   return;
  }
 
- letra.textContent = "Cargando tu canción...";
+ document.getElementById("resultado").style.display = "block";
+  letra.textContent = "Cargando tu canción...";
 
  try{
 
