@@ -247,6 +247,52 @@ function copiarLetra(){
  navigator.clipboard.writeText(texto)
  .then(()=>alert("¡Tu canción fue copiada!"));
 }
+ async function cargarCancionPrivada(){
+
+ const parametros = new URLSearchParams(window.location.search);
+ const id = parametros.get("id");
+ const token = parametros.get("token");
+
+ if(!id && !token) return;
+
+ const letra = document.getElementById("letra");
+
+ if(!id || !token){
+  letra.textContent = "Enlace privado incompleto.";
+  return;
+ }
+
+ letra.textContent = "Cargando tu canción...";
+
+ try{
+
+  const respuesta = await fetch(
+   "https://fork-musica-api.cris65026609.workers.dev/?id=" +
+   encodeURIComponent(id) +
+   "&token=" +
+   encodeURIComponent(token)
+  );
+
+  const datos = await respuesta.json();
+
+  if(!respuesta.ok){
+   throw new Error(datos.error || "No se pudo encontrar la canción.");
+  }
+
+  letra.textContent =
+   datos.cancion.titulo +
+   "\n\n" +
+   datos.cancion.letra;
+
+ }catch(error){
+
+  letra.textContent = "No pudimos recuperar tu canción.\n" + error.message;
+
+ }
+
+}
+
+cargarCancionPrivada();
 </script>
 </body>
 </html>
