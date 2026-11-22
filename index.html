@@ -142,7 +142,8 @@ button:hover{opacity:.9}
 </div>
 
 <script>
-function crearCancion(){
+async function crearCancion(){
+
  const persona=document.getElementById("persona").value;
  const nombre=document.getElementById("nombre").value.trim() || persona;
  const ocasion=document.getElementById("ocasion").value;
@@ -153,159 +154,84 @@ function crearCancion(){
  const voz=document.getElementById("voz").value;
  const estilo=document.getElementById("estilo").value;
 
+ const idioma=document.getElementById("idioma")?.value || "Español";
+
  if(!historia && !cualidad && !mensaje){
   alert("Cuéntanos al menos un detalle para crear tu canción.");
   return;
  }
 
- const limpiar=(texto)=>texto.replace(/[.!?]+$/,"");
+ const boton=document.querySelector('button[onclick="crearCancion()"]');
 
- const elegir=(lista)=>{
-  return lista[Math.floor(Math.random()*lista.length)];
- };
+ if(boton){
+  boton.disabled=true;
+  boton.textContent="🎵 COMPONIENDO TU CANCIÓN...";
+ }
 
- const elegirVarias=(lista,cantidad)=>{
-  const copia=[...lista];
-  const resultado=[];
-  for(let i=0;i<cantidad && copia.length>0;i++){
-   const indice=Math.floor(Math.random()*copia.length);
-   resultado.push(copia.splice(indice,1)[0]);
-  }
-  return resultado;
- };
-
- const comienzos=[
- "Hay historias que comienzan sin avisar,",
- "Nunca imaginé que te iba a encontrar,",
- "Entre millones de caminos llegaste a mi vida,",
- "A veces el destino tiene sus propias razones,",
- "Todo comenzó sin saber lo que vendría,"
- ];
-
- const versos=[
- "Y poco a poco te volviste parte de mis días,",
- "Hay recuerdos que todavía me hacen sonreír,",
- "Cada momento contigo tiene algo especial,",
- "No necesito tenerlo todo si te puedo encontrar,",
- "Hay instantes pequeños que se vuelven eternos,",
- "Contigo aprendí que querer también es cuidar,",
- "Y hasta los días grises pueden volver a brillar,",
- "Porque algunas personas llegan para cambiarlo todo,",
- "No existe un mapa para encontrar la felicidad,",
- "A veces una sonrisa puede cambiar una realidad,"
- ];
-
- const coros=[
- "Y quiero que sepas que te volvería a elegir,",
- "Eres esa canción que quiero repetir,",
- "Si el mundo se detiene, contigo quiero estar,",
- "No necesito razones para volverte a amar,",
- "Que lo sepa el mundo, que lo escuche el corazón,",
- "Lo que siento por ti no cabe en una canción,",
- "Y si pudiera pedir un deseo al despertar,",
- "Sería tener mil momentos más para compartir,"
- ];
-
- const puentes=[
- "Y si la vida nos pone a prueba alguna vez,",
- "No todo será perfecto, eso lo sé,",
- "Pero mientras queden sueños por cumplir,",
- "Siempre habrá una razón para seguir,",
- "Que pasen los años, que cambie la estación,",
- "Hay sentimientos que no entienden de tiempo,",
- "Y lo que nace de verdad deja huellas,"
- ];
-
- const finales=[
- "Esta historia todavía tiene mucho que contar,",
- "Y quedan tantos sueños por alcanzar,",
- "Que nunca se apague esta emoción,",
- "Porque siempre tendrás un lugar en mi corazón,",
- "Lo mejor de esta historia está por comenzar,",
- "Y esta canción te lo quiere recordar,"
- ];
-
- const inicio=elegir(comienzos);
- const versosElegidos=elegirVarias(versos,4);
- const corosElegidos=elegirVarias(coros,4);
- const puenteElegido=elegirVarias(puentes,3);
- const finalElegido=elegirVarias(finales,2);
-
- const titulo=nombre+" - Una historia hecha canción";
-
- const texto=
- "🎵 "+titulo+"\n"+
- "Género: "+genero+"\n"+
- "Voz: "+voz+"\n"+
- "Estilo: "+estilo+"\n"+
- "Ocasión: "+ocasion+"\n\n"+
-
- "🎤 INTRODUCCIÓN\n"+
- inicio+"\n"+
- elegir(comienzos)+"\n"+
- "Hay algo que hoy quiero decirte,\n"+
- "y por eso convertí mis sentimientos en música.\n\n"+
-
- "🎶 VERSO 1\n"+
- (historia ? limpiar(historia)+"," : "Desde que llegaste algo cambió,")+"\n"+
- versosElegidos[0]+"\n"+
- versosElegidos[1]+"\n"+
- elegir(comienzos)+"\n\n"+
-
- "🎶 PRE-CORO\n"+
- "Y aunque a veces me cueste explicar,\n"+
- "todo lo que llevo dentro y no puedo ocultar,\n"+
- versosElegidos[2]+"\n"+
- corosElegidos[0]+"\n\n"+
-
- "❤️ CORO\n"+
- nombre+", esta canción es para ti,\n"+
- (mensaje ? limpiar(mensaje)+"," : "porque eres especial para mí,")+"\n"+
- corosElegidos[1]+"\n"+
- corosElegidos[2]+"\n"+
- "Y si tuviera que volver a comenzar,\n"+
- "mil veces te volvería a encontrar.\n\n"+
-
- "🎶 VERSO 2\n"+
- (cualidad ? limpiar(cualidad)+"," : "Tu manera de ser me hace sonreír,")+"\n"+
- versosElegidos[3]+"\n"+
- "Son esos detalles que no se pueden comprar,\n"+
- "los que hacen que esta historia sea especial.\n"+
- "Y todavía quedan sueños por vivir,\n"+
- "y muchos caminos por descubrir.\n\n"+
-
- "❤️ CORO\n"+
- nombre+", esta canción es para ti,\n"+
- (mensaje ? limpiar(mensaje)+"," : "porque eres especial para mí,")+"\n"+
- corosElegidos[0]+"\n"+
- corosElegidos[2]+"\n"+
- corosElegidos[3]+"\n\n"+
-
- "🎼 PUENTE\n"+
- puenteElegido[0]+"\n"+
- puenteElegido[1]+"\n"+
- "No prometo que todo sea fácil,\n"+
- "pero sí que esta historia vale la pena.\n"+
- puenteElegido[2]+"\n\n"+
-
- "🌟 CORO FINAL\n"+
- "Que se escuche fuerte esta canción,\n"+
- "que hable por mí y por mi corazón.\n"+
- nombre+", nunca dejes de recordar,\n"+
- "que hay momentos que no se pueden reemplazar.\n"+
- corosElegidos[1]+"\n"+
- finalElegido[0]+"\n"+
- finalElegido[1]+"\n\n"+
-
- "🎤 DESPEDIDA\n"+
- "Hoy esta historia se convirtió en canción,\n"+
- "nació de un recuerdo y de una emoción.\n"+
- "Y mientras existan motivos para sentir,\n"+
- "siempre habrá una canción por escribir.";
-
- document.getElementById("letra").textContent=texto;
  document.getElementById("resultado").style.display="block";
- document.getElementById("resultado").scrollIntoView({behavior:"smooth"});
+ document.getElementById("letra").textContent=
+ "💜 FORK-MUSICA está componiendo tu canción con inteligencia artificial. Espera un momento...";
+
+ document.getElementById("resultado").scrollIntoView({
+  behavior:"smooth"
+ });
+
+ try{
+
+  const respuesta=await fetch(
+   "https://fork-musica-api.cris65026609.workers.dev/",
+   {
+    method:"POST",
+    headers:{
+     "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+     persona,
+     nombre,
+     ocasion,
+     historia,
+     cualidad,
+     mensaje,
+     genero,
+     voz,
+     estilo,
+     idioma
+    })
+   }
+  );
+
+  const datos=await respuesta.json();
+
+  if(!respuesta.ok){
+   throw new Error(datos.detalle || datos.error || "No se pudo crear la canción.");
+  }
+
+  if(!datos.letra){
+   throw new Error("Gemini no devolvió una letra.");
+  }
+
+  document.getElementById("letra").textContent=
+   "🎵 "+datos.titulo+"\n"+
+   "🌎 Idioma: "+datos.idioma+"\n"+
+   "🎶 Género: "+datos.genero+"\n\n"+
+   datos.letra;
+
+ }catch(error){
+
+  document.getElementById("letra").textContent=
+   "⚠️ No pudimos crear tu canción.\n\n"+
+   error.message+
+   "\n\nInténtalo nuevamente.";
+
+ }finally{
+
+  if(boton){
+   boton.disabled=false;
+   boton.textContent="CREAR MI LETRA GRATIS";
+  }
+
+ }
+
 }
 function copiarLetra(){
  const texto=document.getElementById("letra").textContent;
