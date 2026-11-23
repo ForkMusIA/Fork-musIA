@@ -135,6 +135,17 @@ button:hover{opacity:.9}
 
 <div class="card" id="resultado" style="display:none;">
 <h2>🎤 Tu canción está lista</h2>
+ <div id="zonaAudio" style="display:none; margin:20px 0;">
+  <p>🎧 Escucha tu canción:</p>
+  <audio
+    id="reproductor"
+    controls
+    preload="none"
+    style="width:100%;"
+  >
+    Tu navegador no admite la reproducción de audio.
+  </audio>
+</div>
 <div id="letra"></div>
 <button onclick="copiarLetra()">📋 COPIAR MI CANCIÓN</button>
 <button onclick="crearCancion()">🔄 CREAR OTRA VERSIÓN</button>
@@ -284,6 +295,20 @@ function copiarLetra(){
    datos.cancion.titulo +
    "\n\n" +
    datos.cancion.letra;
+  // CARGAR REPRODUCTOR DE AUDIO
+if (datos.cancion.preview_key) {
+
+  const reproductor = document.getElementById("reproductor");
+  const zonaAudio = document.getElementById("zonaAudio");
+
+  reproductor.src =
+    "https://fork-musica-api.cris65026609.workers.dev/?audio=1&id=" +
+    encodeURIComponent(id) +
+    "&token=" +
+    encodeURIComponent(token);
+
+  zonaAudio.style.display = "block";
+}
 
  }catch(error){
 
